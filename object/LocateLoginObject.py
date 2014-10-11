@@ -7,6 +7,7 @@ from Data import ReadExcel
 # from Action import DataOperate
 from Action import Browser
 from selenium.webdriver.common.by import By
+from resultlog import ResultLog
 class LocateLoginObject():
     def locateObject(self,browser,object_username,object_password,object_name):
         br=browser
@@ -15,6 +16,8 @@ class LocateLoginObject():
         locate_element=object_name
 
         login_class2=Login.Login()#实例化Login类
+        log=ResultLog.ResultLog()
+
         readexcel_class2=ReadExcel.ReadExcel()
         objectname_locatemethod_locatedata_excelpath="F:\\pytest\\testcase\\Data\\objectname_locatemethod_locatedata.xls"
         objectname_locatemethod_locatedata_sheet=readexcel_class2.getTable(objectname_locatemethod_locatedata_excelpath)#得到excel操作实体
@@ -27,16 +30,32 @@ class LocateLoginObject():
             if list3[0]==locate_element:
                 #在该行中，如果定位方式是id，就使用id定位方式
                 if list3[1]=='id':
-                    element=br.find_element(by=dic1['id'],value=list3[2])
+                    try:
+                        element=br.find_element(by=dic1['id'],value=list3[2])
+                        log.info("元素%s 定位成功" %locate_element.encode('utf-8'))
+                    except:
+                        log.info("需要操作的元素%s 不存在" %locate_element.encode('utf-8') )
                     login_class2.operate_element(br,username,password,locate_element,element)
                 #在该行中，如果定位方式是css，就使用css定位方式
                 elif list3[1]=='css':
-                    element=br.find_element(by=dic1['css'],value=list3[2])
+                    try:
+                        element=br.find_element(by=dic1['css'],value=list3[2])
+                        log.info("元素%s 定位成功" %locate_element.encode('utf-8'))
+                    except:
+                        log.info("需要操作的元素%s 不存在" %locate_element.encode('utf-8') )
                     login_class2.operate_element(br,username,password,locate_element,element)
                 #在该行中，如果定位方式是xpath，就使用xpath定位方式
                 elif list3[1]=='xpath':
-                    element=br.find_element(by=dic1['xpath'],value=list3[2])
+                    try:
+                        element=br.find_element(by=dic1['xpath'],value=list3[2])
+                        log.info("元素%s 定位成功" %locate_element.encode('utf-8'))
+                    except:
+                        log.info("需要操作的元素%s 不存在" %locate_element.encode('utf-8') )
                     login_class2.operate_element(br,username,password,locate_element,element)
                 elif list3[1]=='linktext':
-                    element=br.find_element(by=dic1['linktext'],value=list3[2])
+                    try:
+                        element=br.find_element(by=dic1['linktext'],value=list3[2])
+                        log.info("元素%s 定位成功" %locate_element.encode('utf-8'))
+                    except:
+                        log.info("需要操作的元素%s 不存在" %locate_element.encode('utf-8') )
                     login_class2.operate_element(br,username,password,locate_element,element)

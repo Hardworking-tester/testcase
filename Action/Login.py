@@ -15,6 +15,7 @@ class Login():
         obj=locate_element
         username_send=username
         password_send=password
+        log=ResultLog.ResultLog()
 
         readexcel_class3=ReadExcel.ReadExcel()
         operate_excelpath="F:\\pytest\\testcase\\Data\\operate_method.xls"
@@ -30,17 +31,29 @@ class Login():
                     if list5[1]=='sendkey' and obj=='username':
 
                         element.clear()
-                        element.send_keys(username_send)
+                        try:
+                            element.send_keys(username_send)
+                            log.info("元素%s 操作成功,传递的数据为:%s" %(obj.encode('utf-8'),username_send.encode('utf-8')))
+                        except:
+                            log.info("需要操作的元素%s 不存在" %obj.encode('utf-8') )
                         time.sleep(5)
                     elif list5[1]=='sendkey' and obj=='password':
                         element.clear()
-                        element.send_keys(password_send)
+                        try:
+                            element.send_keys(password_send)
+                            log.info("元素%s 操作成功,传递的数据为:%s" %(obj.encode('utf-8'),password_send.encode('utf-8')))
+                        except:
+                            log.info("需要操作的元素%s 不存在" %obj.encode('utf-8') )
                         time.sleep(5)
                     elif list5[1]=='click':
-                        element.click()
+                        try:
+                            element.click()
+                            log.info("元素%s 操作成功" %obj.encode('utf-8'))
+                        except:
+                            log.info("需要操作的元素%s 不存在" %obj.encode('utf-8') )
                         time.sleep(10)
         else:
-            print("该元素没有在caozuo.xls文件中")
+            log.info("该元素没有在operate_method.xls文件中")
 
 
     def operate_alert(self,br):
@@ -50,7 +63,7 @@ class Login():
             br.switch_to_alert().accept()
 
         except NoAlertPresentException,e:
-            print e
+            log.info("没有找到弹出框")
 
 
 
