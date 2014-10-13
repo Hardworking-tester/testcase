@@ -40,6 +40,7 @@ class GetAndOperateLoginData(unittest.TestCase):
                 class_list[0].locateObject(class_list[2],username,password,object_name_list[m])
             class_list[1].operate_alert(class_list[2])
             log.info("第%d次操作完成" %index)
+
             index+=1
 
     def getObjList(self):

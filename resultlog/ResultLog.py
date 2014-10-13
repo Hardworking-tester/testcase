@@ -17,4 +17,5 @@ def ResultLog():
         if not h.has_key(i):
             h[i]=1
             wfd.write(i)
+
     return log

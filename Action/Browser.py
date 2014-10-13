@@ -11,7 +11,7 @@ class Browser():
         try:
             br=webdriver.Firefox()
         except:
-            log.info("浏览器初始化失败")
+            log.info("浏览器初始化失败了")
         br.get("http://www.xebest.com:8000")
         return br
 
