@@ -9,4 +9,12 @@ def ResultLog():
     formatter=logging.Formatter("%(asctime)s: %(message)s","%Y年%m月%d日 %H:%M:%S")
     filehandler.setFormatter(formatter)
     log.addHandler(filehandler)
+    rfd=open("F:\\resultlog\\resultlog.txt",'r')
+    wfd=file("F:\\resultlog\\resultlog11.txt",'w')
+    h={}
+    for i in rfd:
+
+        if not h.has_key(i):
+            h[i]=1
+            wfd.write(i)
     return log

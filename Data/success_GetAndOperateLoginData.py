@@ -6,6 +6,7 @@ from Action import Login,Browser
 from Data import ReadExcel
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+from resultlog import ResultLog
 import unittest
 class GetAndOperateLoginData(unittest.TestCase):
 
@@ -27,15 +28,19 @@ class GetAndOperateLoginData(unittest.TestCase):
             2、将用户名和密码作为外层for循环，将需要定位的元素的名称的列表作为内层循环，拿到一个需要定位的元素的名称就去定位并进行sendkey或者click操作
         """
         class_list=self.instance_List()
+        log=ResultLog.ResultLog()
 
         #拿到登录功能中需要定位的对象名称列表
         object_name_list=self.getObjList()
         #拿到存储在excel中存储的用户名和密码列表对
         username_password_list=self.getUsernameAndPasswordList()
+        index=1
         for username,password in username_password_list:
             for m in range(object_name_list.__len__()):
                 class_list[0].locateObject(class_list[2],username,password,object_name_list[m])
             class_list[1].operate_alert(class_list[2])
+            log.info("第%d次操作完成" %index)
+            index+=1
 
     def getObjList(self):
         readexcel_class1=ReadExcel.ReadExcel()#实例化读取excel的类
