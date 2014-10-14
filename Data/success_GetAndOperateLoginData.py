@@ -10,6 +10,12 @@ from resultlog import ResultLog
 import unittest
 class GetAndOperateLoginData(unittest.TestCase):
 
+    def setUp(self):
+        #写日志之前先清空日志文件内容
+        log_path="F:\\resultlog\\resultlog.txt"
+        file_operate=file(log_path,'w')
+        file_operate.truncate()
+
     def instance_List(self):
         locate_login_object_class=LocateLoginObject.LocateLoginObject()#实例化定位登录模块所有元素的类
         login_class1=Login.Login()#实例化登录操作的类
@@ -39,14 +45,13 @@ class GetAndOperateLoginData(unittest.TestCase):
             for m in range(object_name_list.__len__()):
                 class_list[0].locateObject(class_list[2],username,password,object_name_list[m])
             class_list[1].operate_alert(class_list[2])
-            log.info("第%d次操作完成" %index)
-
+            log.info("第%d次功能参数化操作完成" %index)
             index+=1
 
     def getObjList(self):
         readexcel_class1=ReadExcel.ReadExcel()#实例化读取excel的类
-        object_excelpath="F:\\pytest\\testcase\\Data\\objectname_locatemethod_locatedata.xls"
-        object_sheet=readexcel_class1.getTable(object_excelpath)
+        object_excelpath="F:\\pytest\\testcase\\Data\\login_data.xls"
+        object_sheet=readexcel_class1.getTableBySheetName(object_excelpath,"objname_locatemethod_locatedata")
         object_sheet_rows=object_sheet.nrows
         object_name_list=[]#得到需要定位的元素的名称的列表
         for i in range(object_sheet_rows):#拿到登录功能中需要定位的对象名称列表
@@ -57,8 +62,8 @@ class GetAndOperateLoginData(unittest.TestCase):
 
     def getUsernameAndPasswordList(self):
         readexcel_class1=ReadExcel.ReadExcel()#实例化读取excel的类
-        senddata_excelpath="F:\\pytest\\testcase\\Data\\username_password.xls"
-        senddata_sheet=readexcel_class1.getTable(senddata_excelpath)
+        senddata_excelpath="F:\\pytest\\testcase\\Data\\login_data.xls"
+        senddata_sheet=readexcel_class1.getTableBySheetName(senddata_excelpath,"username_password_data")
         senddata_sheet_rows=senddata_sheet.nrows
         username_password_list=[]
         for i in range(1,senddata_sheet_rows):

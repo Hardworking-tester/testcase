@@ -18,10 +18,10 @@ class Login():
         log=ResultLog.ResultLog()
 
         readexcel_class3=ReadExcel.ReadExcel()
-        operate_excelpath="F:\\pytest\\testcase\\Data\\operate_method.xls"
-        operate_method_sheet=readexcel_class3.getTable(operate_excelpath)
-        operate_method_sheet_rows=readexcel_class3.getExcelRows(operate_excelpath)
-        operate_method_sheet_cols=readexcel_class3.getExcelCols(operate_excelpath)
+        operate_excelpath="F:\\pytest\\testcase\\Data\\login_data.xls"
+        operate_method_sheet=readexcel_class3.getTableBySheetName(operate_excelpath,"operate_method")
+        operate_method_sheet_rows=operate_method_sheet.nrows
+        operate_method_sheet_cols=operate_method_sheet.ncols
         objectname_list=operate_method_sheet.col_values(0)
         # print objname
         if obj in objectname_list:

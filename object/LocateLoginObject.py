@@ -19,7 +19,7 @@ class LocateLoginObject():
         log=ResultLog.ResultLog()
 
         readexcel_class2=ReadExcel.ReadExcel()
-        objectname_locatemethod_locatedata_excelpath="F:\\pytest\\testcase\\Data\\objectname_locatemethod_locatedata.xls"
+        objectname_locatemethod_locatedata_excelpath="F:\\pytest\\testcase\\Data\\login_data.xls"
         objectname_locatemethod_locatedata_sheet=readexcel_class2.getTable(objectname_locatemethod_locatedata_excelpath)#得到excel操作实体
         objectname_locatemethod_locatedata_sheet_rows=readexcel_class2.getExcelRows(objectname_locatemethod_locatedata_excelpath)#得到excel总行数
         #定义一个字典去映射excel表中的元素定位方式
